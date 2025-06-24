@@ -6,7 +6,8 @@ function findFlagUrl(html) {
   const parser = new DOMParser();
   const doc = parser.parseFromString(html, "text/html");
 
-  elems = doc.getElementsByClassName("ref");
+  const elems = doc.getElementsByClassName("ref");
+
   return Array.from(elems)
     .map((el) => el.getAttribute("value"))
     .join("");
@@ -20,7 +21,7 @@ function FlagForm() {
 
   const onSubmit = async () => {
     setIsLoading(true);
-    setFlagUrlValue("");
+    // setFlagUrlValue("");
     setFoundUrlValue("");
     setFlagValue("");
 
