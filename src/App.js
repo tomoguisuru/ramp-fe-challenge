@@ -19,6 +19,18 @@ function FlagForm() {
   const [foundUrlValue, setFoundUrlValue] = useState("");
   const [flagValue, setFlagValue] = useState("");
 
+  const typeItOut = async (txt) => {
+    setFlagValue("");
+    let currentValue = "";
+    const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+    for (let char of txt) {
+      currentValue += char;
+      setFlagValue(currentValue);
+      await delay(500);
+    }
+  };
+
   const onSubmit = async () => {
     setIsLoading(true);
     // setFlagUrlValue("");
@@ -43,7 +55,9 @@ function FlagForm() {
 
       resp = await fetch(flagUrl);
       const flag = await resp.text();
-      setFlagValue(flag);
+      // setFlagValue(flag);
+
+      await typeItOut(flag);
     } catch (err) {
       console.log(err.message);
     } finally {
@@ -80,11 +94,15 @@ function FlagForm() {
           {foundUrlValue}
         </div>
       )}
-      {foundUrlValue && (
+      {flagValue && (
         <div>
           <strong>Flag:</strong>
           <br />
-          {flagValue}
+          <ul>
+            {Array.from(flagValue).map((char, idx) => (
+              <li key={char + `${idx}`}>{char}</li>
+            ))}
+          </ul>
         </div>
       )}
     </>
