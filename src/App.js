@@ -57,6 +57,7 @@ function FlagForm() {
 
   return (
     <>
+      <h1>Find the Flag</h1>
       <div>
         <label>
           <input
@@ -93,7 +94,6 @@ function FlagForm() {
 export default function App() {
   return (
     <div className="App">
-      <h1>Find the Flag</h1>
       <FlagForm />
     </div>
   );
